@@ -1,10 +1,10 @@
 <template>
     <div>
-       <h1>Blog posts</h1>
+       <h3>Blog posts</h3>
         <li v-for="post of posts" :key="post">
           <h5>{{ post.title }}</h5>
           <router-link :to="'/details/' + post.id" class="btn btn-primary">read more</router-link>
-        </li>
+       </li>
     </div>
 </template>
 
