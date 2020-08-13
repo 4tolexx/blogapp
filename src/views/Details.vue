@@ -1,24 +1,40 @@
 <template>
-   <div>
+   <div class="container">
      <P>{{ showPosts(id) }}</P>
     <h4>{{ post.title }}</h4>
     <p>{{ post.body }}</p>
 
     <h3>Comments</h3>
 
-    <li v-for="comment in comments" :key="comment">{{ comment.body }}</li>
+    <ul class="list group">
+    <li class="list-group-item" v-for="(comment, index) in comments" :key="index">{{ comment.body }}</li>
     <p>{{ showComments(id) }}</p>
+    </ul>
 
-    <b-form @submit.prevent="postComment">
-      <b-form-group id="input-group-1" label="Name" label-for="input-1">
-        <b-form-input id="input-1" v-model="comment.name" placeholder="enter your name"></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-2" label="Comment" label-for="input-2">
-        <b-form-textarea id="input-1" v-model="comment.body" placeholder="enter your comment here"></b-form-textarea>
-      </b-form-group>
-      <input type="submit" class="btn btn-primary" value="postComment"/>
-    </b-form>
+    <h3> Add a Comment </h3>
+  <form class="form-horizontal" @submit.prevent="postComment">
+    <div class="form-group">
+      <label for="Name" class="col-sm-2 control-label">Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="name" placeholder="Name" v-model="comment.name">
+      </div>
+    </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="Email" v-model="comment.email">
+    </div>
+  </div>
+    <div class="form-group">
+      <label for="comment" class="col-sm-2 control-label">comment</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" id="body" placeholder="enter comment" rows="10" v-model="comment.body"></textarea>
+      </div>
+    </div>
+      <div class="col-sm-offset-2 col-sm-10">
+        <input type="submit" class="btn btn-primary" value="post comment"/>
+      </div>
+  </form>
    </div>
 </template>
 
@@ -33,7 +49,8 @@ export default {
       comments: [],
       comment: {
         name: '',
-        body: ''
+        body: '',
+        email: ''
       }
     }
   },
@@ -54,11 +71,12 @@ export default {
     },
 
     postComment () {
-      if (this.comment.name && this.comment.body) {
+      if (this.comment.name && this.comment.body && this.comment.email) {
         this.comments.push(this.comment)
         this.comment = {
           name: '',
-          body: ''
+          body: '',
+          email: ''
         }
       }
     },

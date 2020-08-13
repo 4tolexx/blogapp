@@ -1,10 +1,12 @@
 <template>
-    <div>
+    <div class="container">
        <h3>Blog posts</h3>
-        <li v-for="post of posts" :key="post">
+       <ul class="list-group">
+        <li class="list-group-item" v-for="post of posts" :key="post">
           <h5>{{ post.title }}</h5>
           <router-link :to="'/details/' + post.id" class="btn btn-primary">read more</router-link>
        </li>
+       </ul>
     </div>
 </template>
 
